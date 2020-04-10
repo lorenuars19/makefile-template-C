@@ -28,8 +28,8 @@ OBJDIR	= objs/
 CFLAGS	+= -I $(INCDIR)
 
 SRCS	:= $(wildcard $(SRCDIR)*.c) #			Full path
-SRC	:= $(notdir $(SRCS)) # 					Files only
-OBJ	:= $(SRC:.c=.o)	#						Files only
+SRC	:= $(notdir $(SRCS)) # 				Files only
+OBJ	:= $(SRC:.c=.o)	#				Files only
 OBJS	:= $(addprefix $(OBJDIR), $(OBJ)) #		Full path
 CSRCS	:= $(addprefix ../, $(SRCS)) #			Compiler
 
