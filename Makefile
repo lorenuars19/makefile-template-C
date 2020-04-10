@@ -12,9 +12,9 @@
 
 # ================================ VARIABLES ================================= #
 
-NAME	= morslator
+NAME	= program
 
-CC		= gcc
+CC	= gcc
 CFLAGS	= -Wall -Werror -Wextra
 
 ifeq ($(DEBUG),1)
@@ -28,16 +28,16 @@ OBJDIR	= objs/
 CFLAGS	+= -I $(INCDIR)
 
 SRCS	:= $(wildcard $(SRCDIR)*.c) #			Full path
-SRC		:= $(notdir $(SRCS)) # 					Files only
-OBJ		:= $(SRC:.c=.o)	#						Files only
+SRC	:= $(notdir $(SRCS)) # 					Files only
+OBJ	:= $(SRC:.c=.o)	#						Files only
 OBJS	:= $(addprefix $(OBJDIR), $(OBJ)) #		Full path
 CSRCS	:= $(addprefix ../, $(SRCS)) #			Compiler
 
-GR		= \033[32;1m #	Green
-RE		= \033[31;1m #	Red
-WI		= \033[33;1m #	White
-CY		= \033[36;1m #	Cyan
-RC		= \033[0m #		Reset Colors
+GR	= \033[32;1m #	Green
+RE	= \033[31;1m #	Red
+WI	= \033[33;1m #	White
+CY	= \033[36;1m #	Cyan
+RC	= \033[0m #	Reset Colors
 
 # ================================== RULES =================================== #
 
