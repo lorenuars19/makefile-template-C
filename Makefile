@@ -35,7 +35,7 @@ CSRCS	:= $(addprefix ../, $(SRCS)) #			Compiler
 
 GR	= \033[32;1m #	Green
 RE	= \033[31;1m #	Red
-WI	= \033[33;1m #	White
+WI	= \033[33;1m #	Yellow
 CY	= \033[36;1m #	Cyan
 RC	= \033[0m #	Reset Colors
 
