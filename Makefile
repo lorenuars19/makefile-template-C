@@ -6,7 +6,7 @@
 #    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2020/04/10 15:07:43 by lorenuar         ###   ########.fr        #
+#    Updated: 2020/04/24 12:58:19 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CSRCS	:= $(addprefix ../, $(SRCS)) #			Compiler
 
 GR	= \033[32;1m #	Green
 RE	= \033[31;1m #	Red
-WI	= \033[33;1m #	Yellow
+YE	= \033[33;1m #	Yellow
 CY	= \033[36;1m #	Cyan
 RC	= \033[0m #	Reset Colors
 
@@ -45,7 +45,7 @@ all : $(NAME)
 
 #	linking
 $(NAME)	: $(OBJS)
-	@printf "$(WI)&&& Linking $(OBJ) to $(NAME)$(RC)"
+	@printf "$(YE)&&& Linking $(OBJ) to $(NAME)$(RC)"
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 #	compiling
