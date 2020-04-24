@@ -62,7 +62,7 @@ run : $(NAME)
 #	cleaning
 clean :
 	@echo "$(RE)--- Removing $(OBJ)$(RC)"
-	@rm -f $(OBJS) $(OBJDIR)
+	@rm -fd $(OBJS) $(OBJDIR)
 
 fclean : clean
 	@echo "$(RE)--- Removing $(NAME)$(RC)"
