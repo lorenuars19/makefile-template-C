@@ -6,76 +6,93 @@
 #    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2020/04/24 12:58:19 by lorenuar         ###   ########.fr        #
+#    Updated: 2021/02/20 19:02:07 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ================================ VARIABLES ================================= #
 
-NAME	= program
+# The name of your executable
+NAME	= Program
 
+# Compiler and compiling flags
 CC	= gcc
 CFLAGS	= -Wall -Werror -Wextra
 
+# Debug, use with`make DEBUG=1`
 ifeq ($(DEBUG),1)
 CFLAGS	+= -g3 -fsanitize=address
 endif
 
+# Folder name
 SRCDIR	= src/
-INCDIR	= include/
-OBJDIR	= objs/
+INCDIR	= includes/
+OBJDIR	= bin/
 
+# Add include folder
 CFLAGS	+= -I $(INCDIR)
 
-SRCS	:= $(wildcard $(SRCDIR)*.c) #			Full path
-SRC	:= $(notdir $(SRCS)) # 				Files only
-OBJ	:= $(SRC:.c=.o)	#				Files only
-OBJS	:= $(addprefix $(OBJDIR), $(OBJ)) #		Full path
-CSRCS	:= $(addprefix ../, $(SRCS)) #			Compiler
+# Linking stage flags
+LDFLAGS =
 
-GR	= \033[32;1m #	Green
-RE	= \033[31;1m #	Red
-YE	= \033[33;1m #	Yellow
-CY	= \033[36;1m #	Cyan
-RC	= \033[0m #	Reset Colors
+###▼▼▼<src-updater-do-not-edit-or-remove>▼▼▼
+# **************************************************************************** #
+# **   Generated with https://github.com/lorenuars19/makefile-src-updater   ** #
+# **************************************************************************** #
+
+SRCS =\
+
+HEADERS =\
+
+###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
+
+# String manipulation magic
+SRC		:= $(notdir $(SRCS))
+OBJ		:= $(SRC:.c=.o)
+OBJS	:= $(addprefix $(OBJDIR), $(OBJ))
+
+# Colors
+GR	= \033[32;1m
+RE	= \033[31;1m
+YE	= \033[33;1m
+CY	= \033[36;1m
+RC	= \033[0m
+
+# Implicit rules
+VPATH = $(SRCDIR):$(OBJDIR)
 
 # ================================== RULES =================================== #
 
 all : $(NAME)
 
-#	linking
-$(NAME)	: $(OBJS)
-	@printf "$(YE)&&& Linking $(OBJ) to $(NAME)$(RC)"
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-
-#	compiling
-$(OBJS) : $(SRCS)
-	@printf "$(GR)+++ Compiling $(SRC) to $(OBJ)$(RC)"
+# Compiling
+$(OBJDIR)%.o : %.c
 	@mkdir -p $(OBJDIR)
-	@cd $(OBJDIR) && $(CC) $(CFLAGS) -I ../$(INCDIR) -c $(CSRCS)
+	@printf "$(GR)+$(RC)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-#	runnng
+# Linking
+$(NAME)	: $(SRCS) $(HEADERS) $(OBJS)
+	@printf "\n$(GR)=== Compiled [$(CC) $(CFLAGS)] ===\n--- $(SRC)$(RC)\n"
+	@$(CC) $(LDFLAGS) $(CFLAGS) -o $(NAME) $(OBJS)
+	@printf "$(YE)&&& Linked [$(CC) $(LDFLAGS)] &&&\n--- $(NAME)$(RC)\n"
 
-run : $(NAME)
-	@echo "$(CY)>>> Running $(NAME)$(RC)"
-	./$(NAME)
-#	cleaning
+# Cleaning
 clean :
-	@echo "$(RE)--- Removing $(OBJ)$(RC)"
-	@rm -fd $(OBJS) $(OBJDIR)
+	@echo "$(RE)--- Removing $(OBJDIR)$(RC)"
+	@rm -rf $(OBJDIR)
 
 fclean : clean
 	@echo "$(RE)--- Removing $(NAME)$(RC)"
 	@rm -f $(NAME)
 
+# Special rule to force to remake everything
 re : fclean all
 
-debug :
-	@echo "SRCS $(SRCS)"
-	@echo "SRC $(SRC)"
-	@echo "OBJS $(OBJS)"
-	@echo "OBJ $(OBJ)"
-	@echo "CSRCS $(CSRCS)"
-	@echo "CFLAGS $(CFLAGS)"
+# This runs the program
+run : $(NAME)
+	@echo "$(CY)>>> Running $(NAME)$(RC)"
+	./$(NAME)
 
-.PHONY	= all run clean fclean re debug
+# This specifies the rules that does not correspond to any filename
+.PHONY	= all run clean fclean re
