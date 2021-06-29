@@ -66,13 +66,13 @@ VPATH := $(SRCDIR) $(OBJDIR) $(shell find $(SRCDIR) -type d)
 all : $(NAME)
 
 # Compiling
-$(OBJDIR)%.o : %.c
+$(OBJDIR)%.o : %.c $(HEADERS)
 	@mkdir -p $(OBJDIR)
 	@printf "$(GR)+$(RC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Linking
-$(NAME)	: $(SRCS) $(HEADERS) $(OBJS)
+$(NAME)	: $(SRCS)  $(OBJS)
 	@printf "\n$(GR)=== Compiled [$(CC) $(CFLAGS)] ===\n--- $(SRC)$(RC)\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@printf "$(YE)&&& Linked [$(CC) $(LDFLAGS)] &&&\n--- $(NAME)$(RC)\n"
