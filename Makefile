@@ -79,11 +79,11 @@ $(NAME)	: $(SRCS)  $(OBJS)
 
 # Cleaning
 clean :
-	@printf "$(RE)--- Removing $(OBJDIR)$(RC)"
+	@printf "$(RE)--- Removing $(OBJDIR)$(RC)\n"
 	@rm -rf $(OBJDIR)
 
 fclean : clean
-	@printf "$(RE)--- Removing $(NAME)$(RC)"
+	@printf "$(RE)--- Removing $(NAME)$(RC)\n"
 	@rm -f $(NAME)
 
 # Special rule to force to remake everything
@@ -91,7 +91,7 @@ re : fclean all
 
 # This runs the program
 run : $(NAME)
-	@printf "$(CY)>>> Running $(NAME)$(RC)"
+	@printf "$(CY)>>> Running $(NAME)$(RC)\n"
 	./$(NAME)
 
 # This specifies the rules that does not correspond to any filename
