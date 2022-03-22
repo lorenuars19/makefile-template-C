@@ -63,13 +63,17 @@ VPATH := $(SRCDIR) $(OBJDIR) $(shell find $(SRCDIR) -type d)
 
 # ================================== RULES =================================== #
 
-all : $(NAME)
+all : $(OBJDIR) $(NAME)
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
 # Compiling
-$(OBJDIR)%.o : %.c $(HEADERS)
+$(OBJDIR)%.o : %.c
 	@mkdir -p $(OBJDIR)
 	@printf "$(GR)+$(RC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+
 
 # Linking
 $(NAME)	: $(SRCS)  $(OBJS)
